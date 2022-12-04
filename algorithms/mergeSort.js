@@ -6,7 +6,9 @@ function splitArray(arr) {
 
   const splitIndex = Math.floor(arr.length / 2);
 
+  // .slice does not include the splitIndex / (end value)
   const leftSide = splitArray(arr.slice(0, splitIndex));
+  // .slice includes the splitIndex / (start value)
   const rightSide = splitArray(arr.slice(splitIndex));
 
   return merge(leftSide, rightSide);
