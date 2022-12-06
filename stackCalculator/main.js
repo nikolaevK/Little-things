@@ -1,7 +1,8 @@
 // Shunting yard algorithm
 // converts infix notation to postfix notation
+// Time Complexity O(n)
 function convertToPostFix(string) {
-  const array = string.split("");
+  const array = string.split(" ");
 
   const output = [];
   const operations = [];
@@ -89,6 +90,7 @@ function precede(operator1, operator2) {
 }
 
 function calculate(string) {
+  // Stack time complexity O(n)
   const postFixNotArray = string.split(" ");
   const output = [];
 
@@ -119,7 +121,7 @@ function calculate(string) {
         output.push(arg2 - arg1);
         break;
       default:
-        output.push(parseInt(postFixNotArray[i]));
+        output.push(parseFloat(postFixNotArray[i]));
         break;
     }
   }
