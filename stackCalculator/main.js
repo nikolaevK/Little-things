@@ -47,7 +47,7 @@ function convertToPostFix(string) {
     output.push(operations.pop());
   }
 
-  return output.join(" ");
+  return output;
 }
 
 function precede(operator1, operator2) {
@@ -89,9 +89,8 @@ function precede(operator1, operator2) {
   return prec2 <= prec1;
 }
 
-function calculate(string) {
+function calculate(postFixNotArray) {
   // Stack time complexity O(n)
-  const postFixNotArray = string.split(" ");
   const output = [];
 
   for (let i = 0; i < postFixNotArray.length; i++) {
@@ -130,7 +129,6 @@ function calculate(string) {
 }
 
 // console.log(calculate("3 4 2 * 1 5 - 2 3 ^ ^ / +"));
-// console.log(calculate(convertToPostFix("3+4*2/(1-5)^2^3")));
+// console.log(calculate(convertToPostFix("3 + 4 * 2 / ( 1 - 5 ) ^ 2 ^ 3")));
 
-// console.log(calculate(convertToPostFix("3+4*2")));
-// console.log(convertToPostFix("3+4*2/(1−5)^2^3"));
+// console.log(calculate(convertToPostFix("3 + 4 * 2")));
