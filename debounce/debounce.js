@@ -7,10 +7,10 @@ function debounce(cb, delay = 1000) {
   let timer;
   return (...args) => {
     clearTimeout(timer);
-    setTimeout(() => {
+    timer = setTimeout(() => {
       cb(...args);
     }, delay);
   };
 }
 
-print();
+// print();
