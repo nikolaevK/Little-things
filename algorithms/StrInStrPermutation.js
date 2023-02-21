@@ -37,4 +37,4 @@ function compare(str, x, n) {
   }
 }
 
-// console.log(permutationInStr("abcabcdkjgjkfdgabckabcjsfkabc", "abc"));
+// console.log(permutationInStr("abcabcdkjgjkfdgabckabcjsfkabc", "abc")); //7
