@@ -1,3 +1,6 @@
+// Best case O(n)
+// When data is nearly sorted then Bubble and Insertion algorithms perform quicker than the others
+
 function sortArray(array) {
   for (let i = 0; i < array.length - 1; i++) {
     // swap allows for optimization in case array is almost sorted
