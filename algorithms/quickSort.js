@@ -1,6 +1,7 @@
 // Best and Average O(n log n)
 // Worst O(n^2) when array is sorted after the pivot point
 // These only works with pivot point arr[0]
+// Uses less memory than Merge Sort
 function quickSort(arr) {
   if (arr.length <= 2) return arr;
   // pivot mutates the array and returns index of the pivot value
@@ -14,10 +15,10 @@ function quickSort(arr) {
 }
 
 function pivot(arr) {
-  let pivot = 2;
-  let counter = 2;
+  let pivot = 0;
+  let counter = 0;
 
-  for (let i = 0; i < arr.length - counter; i++) {
+  for (let i = 0; i < arr.length; i++) {
     if (arr[i] < arr[pivot]) {
       counter += 1;
 

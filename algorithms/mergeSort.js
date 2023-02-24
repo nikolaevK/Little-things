@@ -1,4 +1,5 @@
 // O(n log n)
+// Uses more space than quickSort
 
 function mergeSort(arr) {
   // check length to stop recursion and to return sorted array
