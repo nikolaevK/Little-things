@@ -9,7 +9,7 @@ function selectionSort(arr) {
   for (let i = 0; i < arr.length; i++) {
     let min = arr[i];
     // O(n^2) because it keeps looking for min value
-    for (let j = 0 + i; j < arr.length; j++) {
+    for (let j = i; j < arr.length; j++) {
       if (min > arr[j]) {
         min = arr[j];
       }
