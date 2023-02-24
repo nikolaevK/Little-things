@@ -1,5 +1,7 @@
-function splitArray(arr) {
-  // check length to stop recursion
+// O(n log n)
+
+function mergeSort(arr) {
+  // check length to stop recursion and to return sorted array
   if (arr.length <= 1) {
     return arr;
   }
@@ -7,9 +9,9 @@ function splitArray(arr) {
   const splitIndex = Math.floor(arr.length / 2);
 
   // .slice does not include the splitIndex / (end value)
-  const leftSide = splitArray(arr.slice(0, splitIndex));
+  const leftSide = mergeSort(arr.slice(0, splitIndex));
   // .slice includes the splitIndex / (start value)
-  const rightSide = splitArray(arr.slice(splitIndex));
+  const rightSide = mergeSort(arr.slice(splitIndex));
 
   return merge(leftSide, rightSide);
 }
@@ -23,6 +25,8 @@ function merge(leftSide, rightSide) {
     const rightValue = rightSide[i];
     const leftValue = leftSide[j];
 
+    // >= would mean that array is empty or iterated through
+    // all left to do is to push all the values from the other array
     if (i >= rightSide.length) {
       merged.push(leftValue);
       j++;
