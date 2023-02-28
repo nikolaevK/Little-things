@@ -4,6 +4,8 @@
 // No random access, needs to be traversed
 // Effective insertion and deletion
 
+//Insertion O(1), deletion O(1)/O(N), Searching O(N), Access O(n)
+
 class Node {
   constructor(value) {
     this.value = value;
@@ -134,7 +136,7 @@ class SinglyLinkedList {
 
   remove(position) {
     if (this.length <= position || position < 0) return null;
-    if (this.length - 1 === position) return this.pop();
+    if (this.length - 1 === position) return this.pop(); // O(n) because second to last index need to be known
     if (position === 0) return this.shift();
 
     let previousNode = this.get(position - 1);
