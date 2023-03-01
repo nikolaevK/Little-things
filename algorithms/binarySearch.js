@@ -19,17 +19,3 @@ function findValue(arr, searchValue) {
 
   return binarySearch(arr, searchValue, 0, length);
 }
-
-// Other variation of bubble search
-function binarySearch(arr, val) {
-  // because it takes min value, subtracting .5 from any number will give by one less
-  let midPoint = Math.floor(arr.length - 1 / 2);
-
-  if (val === arr[midPoint]) return midPoint;
-
-  if (val < arr[midPoint]) return binarySearch(arr.slice(0, midPoint), val);
-  if (val > arr[midPoint])
-    return binarySearch(arr.slice(midPoint + 1, arr.length), val);
-
-  return -1;
-}

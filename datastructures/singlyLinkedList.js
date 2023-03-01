@@ -26,9 +26,10 @@ class SinglyLinkedList {
     if (!this.head) {
       this.head = newNode;
       this.tail = newNode;
+    } else {
+      this.tail.next = newNode; // assigning current node pointer (.next) from null to newNode reference
+      this.tail = newNode; // assigning new tail value to a new node
     }
-    this.tail.next = newNode; // assigning current node pointer (.next) from null to newNode reference
-    this.tail = newNode; // assigning new tail value to a new node
     // keep track of added nodes
     this.length += 1;
 
@@ -166,9 +167,12 @@ class SinglyLinkedList {
     let next = null;
 
     for (let i = 0; i < this.length; i++) {
+      // next is used to move node forward
       next = node.next;
+      // assigning current node to previous node to reverse pointer
       node.next = previous;
 
+      // moving all variables one step forward to repeat pointer reassignment
       previous = node;
       node = next;
     }
