@@ -22,6 +22,7 @@ class DoublyLinkedList {
 
   push(value) {
     let newNode = new Node(value);
+    // checking if list has any values
     if (!this.head) {
       this.head = newNode;
       this.tail = newNode;
@@ -38,12 +39,14 @@ class DoublyLinkedList {
     if (!this.head) return undefined;
 
     let removedNode = this.tail;
+    // if length is 1, one element in the list which is removed
     if (this.length === 1) {
       this.head = null;
       this.tail = null;
     } else {
+      // assigning previous node to new tail
       this.tail = removedNode.previous;
-      // Remove the next from last node
+      // Remove the node.next from previous node
       this.tail.next = null;
       // To clear the pointer from removed element
       removedNode.previous = null;
@@ -91,7 +94,7 @@ class DoublyLinkedList {
   get(index) {
     if (this.length <= index || index < 0) return null;
 
-    let midValue = this.length / 2;
+    let midValue = this.length / 2; // To check from which side of the list to search
 
     // looking from the end of the LinkedList
     if (midValue <= index) {
@@ -124,8 +127,8 @@ class DoublyLinkedList {
 
   insert(value, index) {
     if (this.length < index || index < 0) return false;
-    if (index === 0) return !!this.unshift(value);
-    if (index === this.length) return !!this.push(value); // !! or double bang to return true
+    if (index === 0) return !!this.unshift(value); // insert at the begging of the list
+    if (index === this.length) return !!this.push(value); // insert at the end of the linked list
 
     let newNode = new Node(value);
     let beforeNode = this.get(index - 1); // find a node before the index at which value should be inserted
@@ -158,5 +161,37 @@ class DoublyLinkedList {
       return itemToBeRemoved;
     }
     return false;
+  }
+
+  print() {
+    const arr = [];
+    let current = this.head;
+    while (current) {
+      arr.push(current.value);
+      current = current.next;
+    }
+    console.log(arr);
+  }
+
+  reverse() {
+    let node = this.head;
+    this.head = this.tail;
+    this.tail = node;
+    let previous = null;
+    let next = null;
+
+    for (let i = 0; i < this.length; i++) {
+      // next is used to move node forward
+      next = node.next;
+      // assigning current.next node to previous node to reverse pointer
+      node.next = previous;
+      // assigning current.previous node to next node to reverse pointer
+      node.previous = next;
+
+      // moving all variables one step forward to repeat pointer reassignment
+      previous = node;
+      node = next;
+    }
+    return this;
   }
 }
