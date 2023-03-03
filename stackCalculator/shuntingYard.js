@@ -1,7 +1,8 @@
 // Shunting yard algorithm
 // converts infix notation to postfix notation
 // then using postfix notation calculates an answer
-// Time Complexity O(n)
+// Time Complexity O(n) on average
+// Stack allows for constant O(1) insertion and removal
 
 class Node {
   constructor(value) {
