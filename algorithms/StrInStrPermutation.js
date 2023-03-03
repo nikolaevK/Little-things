@@ -19,22 +19,42 @@ function permutationInStr(string, x) {
 }
 
 function compare(str, x, n) {
-  let j = 0;
-  // Checks if every value of a block is inside a search string
-  for (let i = 0; i < str.length; i++) {
-    // if characters in the block are not unique then method .includes doesn't work
-    // block: "irr", search string: "ira"
-    // method .includes will return true two times for "r"
-    if (x.includes(str[i])) {
-      j++;
+  const obj1 = {};
+  const obj2 = {};
+
+  for (let char1 of str) {
+    obj1[char1] = (obj1[char1] || 0) + 1;
+  }
+
+  for (let char2 of x) {
+    obj2[char2] = (obj2[char2] || 0) + 1;
+  }
+
+  for (let key in obj1) {
+    if (obj1[key] !== obj2[key]) {
+      return false;
     }
   }
-  // if length is same as match value then permutation matched
-  if (j == n) {
-    return true;
-  } else {
-    return false;
-  }
+  return true;
 }
+
+// function compare(str, x, n) {
+//   let j = 0;
+//   // Checks if every value of a block is inside a search string
+//   for (let i = 0; i < str.length; i++) {
+//     // if characters in the block are not unique then method .includes doesn't work
+//     // block: "irr", search string: "ira"
+//     // method .includes will return true two times for "r"
+//     if (x.includes(str[i])) {
+//       j++;
+//     }
+//   }
+//   // if length is same as match value then permutation matched
+//   if (j == n) {
+//     return true;
+//   } else {
+//     return false;
+//   }
+// }
 
 // console.log(permutationInStr("abcabcdkjgjkfdgabckabcjsfkabc", "abc")); //7

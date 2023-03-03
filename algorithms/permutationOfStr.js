@@ -20,9 +20,10 @@ function findPermutationsOf(string) {
     }
   }
 
-  return permutationsArr;
+  return [...new Set(permutationsArr)]; // Set creates unique values
 }
 
+// alternative solution to [...new Set(permutationsArr)]
 function checkForDuplicates(array) {
   const noDuplicateArr = [];
 
