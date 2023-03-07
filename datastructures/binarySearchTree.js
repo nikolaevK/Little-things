@@ -69,6 +69,9 @@ class binarySearchTree {
   // Breadth First Search => => => Searches Horizontally
   // For every level of tree, traverse horizontally until there is no nodes on same level
   // By using a queue, create an order in which the nodes will be pushed to final array
+
+  // If the tree is large (wide), it is very memory extensive due to the queue which keeps track of order and grows
+  // Good for deep trees
   BFS() {
     let queue = []; // using a queue FIFO // it can be implemented as linked list to improve performance
     let visited = [];
@@ -90,15 +93,17 @@ class binarySearchTree {
   // Depth First Search
   // Down first. Vertical
   // For every node, fully traverse the left and then right of that node
-  // PreOrder
+  // Adding the node first, then all the nodes on the left and then all the nodes on the right
+  // PreOrder, from top to bottom
+
+  // Good for wide trees, less memory usage
   DFSPreOrder() {
     let visited = [];
     let current = this.root;
 
     // helper function
     const traverse = (node) => {
-      visited.push(node.value);
-
+      visited.push(node.value); // node pushed first
       if (node.left) traverse(node.left); // Visiting the whole left side before the right side
       if (node.right) traverse(node.right); // visiting the right side
     };
@@ -107,7 +112,7 @@ class binarySearchTree {
   }
 
   // For any node, visit its children before the actual node
-  // Explore the left children then the right children then add the Root
+  // Explore from bottom to top, the left children then the right children from bottom to top then add the root
   DFSPostOrder() {
     let visited = [];
     let current = this.root;
@@ -118,6 +123,22 @@ class binarySearchTree {
       if (node.right) traverse(node.right); // visiting the right side
       // All the children of the node from left to right will be added first, then the node itself
       visited.push(node.value);
+    };
+    traverse(current);
+    return visited;
+  }
+
+  // from bottom to top
+  // traversing left side then adding the root and traversing right side
+  DFSInOrder() {
+    let visited = [];
+    let current = this.root;
+
+    // helper function
+    const traverse = (node) => {
+      if (node.left) traverse(node.left); // Visiting the whole left side before the right side
+      visited.push(node.value); // Add the node, then traverse its right side
+      if (node.right) traverse(node.right); // visiting the right side
     };
     traverse(current);
     return visited;
