@@ -1,4 +1,5 @@
 // FIFO First in First Out
+// O(1) insertion and O(1) dequeuing
 
 class Node {
   constructor(value) {

@@ -65,4 +65,61 @@ class binarySearchTree {
       }
     }
   }
+
+  // Breadth First Search => => => Searches Horizontally
+  // For every level of tree, traverse horizontally until there is no nodes on same level
+  // By using a queue, create an order in which the nodes will be pushed to final array
+  BFS() {
+    let queue = []; // using a queue FIFO // it can be implemented as linked list to improve performance
+    let visited = [];
+    let node;
+
+    queue.push(this.root);
+
+    while (queue.length > 0) {
+      node = queue.shift();
+      visited.push(node);
+
+      if (node.left) queue.push(node.left); // First in First Out
+      if (node.right) queue.push(node.right);
+
+      return visited;
+    }
+  }
+
+  // Depth First Search
+  // Down first. Vertical
+  // For every node, fully traverse the left and then right of that node
+  // PreOrder
+  DFSPreOrder() {
+    let visited = [];
+    let current = this.root;
+
+    // helper function
+    const traverse = (node) => {
+      visited.push(node.value);
+
+      if (node.left) traverse(node.left); // Visiting the whole left side before the right side
+      if (node.right) traverse(node.right); // visiting the right side
+    };
+    traverse(current);
+    return visited;
+  }
+
+  // For any node, visit its children before the actual node
+  // Explore the left children then the right children then add the Root
+  DFSPostOrder() {
+    let visited = [];
+    let current = this.root;
+
+    // helper function
+    const traverse = (node) => {
+      if (node.left) traverse(node.left); // Visiting the whole left side before the right side
+      if (node.right) traverse(node.right); // visiting the right side
+      // All the children of the node from left to right will be added first, then the node itself
+      visited.push(node.value);
+    };
+    traverse(current);
+    return visited;
+  }
 }

@@ -4,6 +4,7 @@
 
 // Insertion and Removal O(1) constant time, Removal always constant
 // Searching and Access O(N), however searching is optimized but still O(N)
+// Optimized by implementing the get method which traverses from end or beginning depending on the index
 
 class Node {
   constructor(value) {
