@@ -97,6 +97,7 @@ class binarySearchTree {
   // PreOrder, from top to bottom
 
   // Good for wide trees, less memory usage
+  // Good for keeping the record of the tree in case it needs to be reconstructed later
   DFSPreOrder() {
     let visited = [];
     let current = this.root;
@@ -130,6 +131,7 @@ class binarySearchTree {
 
   // from bottom to top
   // traversing left side then adding the root and traversing right side
+  // return ordered list
   DFSInOrder() {
     let visited = [];
     let current = this.root;
