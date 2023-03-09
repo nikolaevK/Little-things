@@ -1,6 +1,7 @@
 // MaxBinaryHeap, a parent node is always larger than its children
 // MinBinaryHeap, a parent node is always smaller than its children
 // Insertion and removal time complexity O(log n)
+// Searching is O(n)
 
 class MaxBinaryHeap {
   constructor() {

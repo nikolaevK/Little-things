@@ -1,3 +1,7 @@
+// Built with binary heap, however can be implemented with different ways
+// Insertion and removal time complexity O(log n)
+// Searching is O(n)
+
 class Node {
   constructor(value, priority) {
     this.value = value;
