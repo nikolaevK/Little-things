@@ -1,8 +1,11 @@
-// MaxBinaryHeap, a parent node is always larger than its children
-// MinBinaryHeap, a parent node is always smaller than its children
-// Insertion and removal time complexity O(log n)
+class Node {
+  constructor(value, priority) {
+    this.value = value;
+    this.priority = priority;
+  }
+}
 
-class MaxBinaryHeap {
+class PriorityQueue {
   constructor() {
     this.values = [];
   }
@@ -13,56 +16,62 @@ class MaxBinaryHeap {
     this.values[index2] = temp;
   }
 
-  insert(value) {
-    this.values.push(value);
+  enqueue(value, priority) {
+    const newNode = new Node(value, priority);
+    if (this.values.length === 0) return this.values.push(newNode);
+
+    this.values.push(newNode);
 
     const bubbleUp = () => {
       // the index of the value will be last in the array
       let n = this.values.length - 1;
-      let parentIndex = Math.floor((n - 1) / 2);
+      let parentIndex = Math.round((n - 1) / 2);
 
-      while (this.values[parentIndex] < this.values[n]) {
+      while (this.values[parentIndex].priority > this.values[n].priority) {
         // If larger, swap the child (value) with its node
         this.swap(n, parentIndex);
         // assign the index of the value to index of the node
         n = parentIndex;
         // find the new index (parent) of new child or the node
         // repeat until there are no smaller value parents
-        parentIndex = Math.floor((n - 1) / 2);
+        parentIndex = Math.round((n - 1) / 2);
       }
     };
 
     bubbleUp();
   }
 
-  extractMax() {
-    const max = this.values[0];
+  dequeue() {
+    const maxPriority = this.values[0];
 
     // assign last element to the root
-    // by assigning last element we are removing fist
     this.values[0] = this.values[this.values.length - 1];
 
     let parentIndex = 0;
 
     let swapped = 1;
 
-    while (swapped !== null) {
+    while (
+      swapped !== null &&
+      parentIndex * 2 + 1 < this.values.length &&
+      parentIndex * 2 + 2 < this.values.length
+    ) {
       let leftChildIdx = parentIndex * 2 + 1;
       let rightChildIdx = parentIndex * 2 + 2;
       // swap with the largest child
-      let maxIndex = Math.max(
-        this.values[leftChildIdx],
-        this.values[rightChildIdx]
+      let minIndex = Math.min(
+        this.values[leftChildIdx].priority,
+        this.values[rightChildIdx].priority
       );
       if (
-        maxIndex === this.values[leftChildIdx] &&
-        this.values[parentIndex] < this.values[leftChildIdx]
+        minIndex === this.values[leftChildIdx].priority &&
+        this.values[parentIndex].priority > this.values[leftChildIdx].priority
       ) {
         this.swap(parentIndex, leftChildIdx);
         parentIndex = leftChildIdx;
       } else if (
-        maxIndex === this.values[rightChildIdx] &&
-        this.values[parentIndex] < this.values[rightChildIdx]
+        minIndex === this.values[rightChildIdx].priority &&
+        this.values[parentIndex].priority > this.values[rightChildIdx].priority
       ) {
         this.swap(parentIndex, rightChildIdx);
         parentIndex = rightChildIdx;
@@ -74,6 +83,6 @@ class MaxBinaryHeap {
     // it was bubbled down from top and assigned new place
     this.values.pop();
 
-    return max;
+    return maxPriority;
   }
 }
