@@ -2,6 +2,8 @@
 // Depends on the hash function
 // Needs to distribute evenly
 // Needs to be fast
+// Separate chaining => storing in a nested array
+// Linear probing => looking forward for an empty slot
 
 class HashTable {
   constructor(size = 53) {
