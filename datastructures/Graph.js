@@ -89,4 +89,25 @@ class Graph {
     // instead of starting with first element in adjacency list, start with popped one (last)
     return results;
   }
+
+  BFS(vertex) {
+    const queue = [vertex];
+    const results = [];
+    const visited = {};
+    let next;
+
+    visited[vertex] = true;
+
+    while (queue.length > 0) {
+      next = queue.shift();
+      results.push(next);
+      this.adjacencyList[next].forEach((v) => {
+        if (!visited[v]) {
+          visited[v] = true;
+          queue.push(v);
+        }
+      });
+    }
+    return results;
+  }
 }
