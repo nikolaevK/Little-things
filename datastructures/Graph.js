@@ -51,4 +51,42 @@ class Graph {
     // deletes the Vertex
     delete this.adjacencyList[vertex];
   }
+
+  DFSrecursive(vertex) {
+    const results = [];
+    const visited = {};
+
+    const DFS = (vertex) => {
+      if (this.adjacencyList[vertex].length === 0) return; // base case
+      visited[vertex] = true; // visited
+      results.push(vertex);
+
+      this.adjacencyList[vertex].forEach((v) => {
+        if (!visited[v]) return DFS(v);
+      });
+    };
+    DFS(vertex);
+    return results;
+  }
+
+  DFSiterative(vertex) {
+    const stack = [];
+    const results = [];
+    const visited = {};
+    stack.push(vertex);
+    visited[vertex] = false;
+
+    while (stack.length > 0) {
+      let next = stack.pop();
+      if (!visited[next]) {
+        visited[next] = true;
+        results.push(next);
+        this.adjacencyList[next].forEach((v) => stack.push(v));
+      }
+    }
+    // Results will be in different order than the results from recursive solution
+    // due to implementation of a stack but still DFS
+    // instead of starting with first element in adjacency list, start with popped one (last)
+    return results;
+  }
 }
