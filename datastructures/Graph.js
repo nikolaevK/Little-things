@@ -16,6 +16,7 @@
 // Less space than adjacency matrix
 
 // Undirected Graph
+// Unweighted Graph
 class Graph {
   constructor() {
     this.adjacencyList = {};

@@ -1,7 +1,3 @@
-// Built with binary heap, however can be implemented with different ways
-// Insertion and removal time complexity O(log n)
-// Searching is O(n)
-
 class Node {
   constructor(value, priority) {
     this.value = value;
@@ -88,5 +84,72 @@ class PriorityQueue {
     this.values.pop();
 
     return maxPriority;
+  }
+}
+
+class WeightedGraph {
+  constructor() {
+    this.adjacencyList = {};
+  }
+
+  addVertex(vertex) {
+    if (!this.adjacencyList[vertex]) this.adjacencyList[vertex] = [];
+  }
+
+  addEdge(vertex1, vertex2, weight) {
+    this.adjacencyList[vertex1].push({ node: vertex2, weight });
+    this.adjacencyList[vertex2].push({ node: vertex1, weight });
+  }
+
+  // Dijkstra's Algorithm
+  dijkstra(start, end) {
+    const nodes = new PriorityQueue();
+    const distances = {};
+    const previous = {};
+    const path = [];
+    let smallest;
+
+    // initial state
+    for (let vertex in this.adjacencyList) {
+      if (vertex === start) {
+        distances[vertex] = 0;
+        nodes.enqueue(vertex, 0);
+      } else {
+        distances[vertex] = Infinity;
+        nodes.enqueue(vertex, Infinity);
+      }
+    }
+    while (nodes.values.length) {
+      smallest = nodes.dequeue().value;
+
+      if (smallest === end) {
+        // done
+        while (previous[smallest]) {
+          path.push(smallest);
+          smallest = previous[smallest];
+        }
+        break;
+      }
+      if (smallest || distances[smallest] !== Infinity) {
+        for (let neighbor in this.adjacencyList[smallest]) {
+          // neighbor is an index of a neighbor
+          let nextNode = this.adjacencyList[smallest][neighbor]; // getting actual value, an object
+          // adding weight of previous nodes to a new neighbor
+          let newDistance = distances[smallest] + nextNode.weight;
+
+          // checking if the new distance to that node is smaller than the current distance
+          // which is saved in distances[of that node]
+          if (newDistance < distances[nextNode.node]) {
+            // updating new smallest distance to neighbor
+            distances[nextNode.node] = newDistance;
+            // updating previous - how we we got to neighbor
+            previous[nextNode.node] = smallest;
+            // Enqueue the node with new priority
+            nodes.enqueue(nextNode.node, newDistance);
+          }
+        }
+      }
+    }
+    return path.concat(smallest).reverse();
   }
 }
