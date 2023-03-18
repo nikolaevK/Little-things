@@ -7,17 +7,18 @@ function selectionSort(arr) {
   if (arr.length <= 1) return arr;
 
   for (let i = 0; i < arr.length; i++) {
-    let min = arr[i];
+    let min = i;
     // O(n^2) because it keeps looking for min value
     for (let j = i; j < arr.length; j++) {
-      if (min > arr[j]) {
-        min = arr[j];
+      if (arr[min] > arr[j]) {
+        min = j;
       }
     }
     // swap only if i and index of min value are different to avoid extra steps
-    if (i !== arr.indexOf(min)) {
-      arr[arr.indexOf(min)] = arr[i];
-      arr[i] = min;
+    if (i !== min) {
+      temp = arr[min];
+      arr[min] = arr[i];
+      arr[i] = temp;
     }
   }
   return arr;

@@ -19,5 +19,4 @@ function sortArray(array) {
     if (swap) break;
   }
   return array;
-  //test
 }
