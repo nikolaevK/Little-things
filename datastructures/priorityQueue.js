@@ -22,23 +22,20 @@ class PriorityQueue {
 
   enqueue(value, priority) {
     const newNode = new Node(value, priority);
-    if (this.values.length === 0) return this.values.push(newNode);
-
     this.values.push(newNode);
 
     const bubbleUp = () => {
       // the index of the value will be last in the array
-      let n = this.values.length - 1;
-      let parentIndex = Math.round((n - 1) / 2);
+      let index = this.values.length - 1;
 
-      while (this.values[parentIndex].priority > this.values[n].priority) {
-        // If larger, swap the child (value) with its node
-        this.swap(n, parentIndex);
-        // assign the index of the value to index of the node
-        n = parentIndex;
-        // find the new index (parent) of new child or the node
-        // repeat until there are no smaller value parents
-        parentIndex = Math.round((n - 1) / 2);
+      while (index > 0) {
+        let parentIndex = Math.floor((index - 1) / 2);
+        if (this.values[parentIndex].priority <= this.values[index].priority)
+          break;
+        // If child has more priority, swap the child (value) with its node
+        this.swap(index, parentIndex);
+        // assign new index to continue bubbling up
+        index = parentIndex;
       }
     };
 
