@@ -15,3 +15,18 @@ function insertionSort(arr) {
   }
   return arr;
 }
+
+// Another way
+function insertionSort(list) {
+  for (let i = 1; i < list.length; i++) {
+    let unsorted = i;
+    while (unsorted > 0 && list[unsorted - 1] > list[unsorted]) {
+      [list[unsorted - 1], list[unsorted]] = [
+        list[unsorted],
+        list[unsorted - 1],
+      ];
+      unsorted -= 1;
+    }
+  }
+  return list;
+}
